@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .container {
+            max-width: 800px;
+            background: #f3b5b5;
+            width: 800px;
+            height: 100%;
+            padding: 25px 40px 10px 40px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-weight: 400;
+            font-size: 25px;
+            background: linear-gradient(115deg, #7e5452 10%, #b84536 90%);
+        }
+
+        .container form {
+            padding: 30px 0 0 0;
+        }
+
+        input[type=number] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            height: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type=rad] {
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            height: 8px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type=submit] {
+            height: 30px;
+            width: 150px;
+            font-weight: 900;
+            font-size: 25px;
+            background: linear-gradient(115deg, #ec928e 10%, #831203 90%);
+            font-family: Copperplate;
+            border: none;
+            border-radius: 10px;
+        }
+
+        form .row .input-info {
+            width: 100%;
+            height: 100px;
+            margin: 0 20px;
+            font-size: 17px;
+        }
+
+        .container .text {
+            text-align: center;
+            font-size: 35px;
+            font-weight: 600;
+            font-family: Lucida Handwriting;
+            background: -webkit-linear-gradient(right, #e63a34, #f16b71, #ec6e6a, #ec4343);
+        }
+
+        label.ques {
+            font-weight: 900;
+            font-size: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">
+            Heart Attack Prediction
+        </div>
+        <form action="{{url_for('predict')}}" method="post">
+            <div class="row">
+                <div class="input-info">
+                    <label for="age" class="ques">Age</label>
+                    <p> <input type="number" name="age" required></input></p>
+                </div>
+                <div class="input-info">
+                    <label for="sex" class="ques">Gender</label>
+                    <p> <input type="radio" id="female" name="sex" value=0>
+                        <label for="female">Female</label>
+                        <input type="radio" id="male" name="sex" value=1>
+                        <label for="male">Male</label>
+                    </p>
+                </div>
+                <div class="input-info">
+                    <label for="cp" class="ques">Chest Pain</label>
+                    <p> <input type="radio" id="tangina" name="cp" value=1>
+                        <label for="tangina">Typical Angina</label>
+                        <input type="radio" id="atangina" name="cp" value=2>
+                        <label for="atangina">Atypical Angina</label>
+                        <input type="radio" id="nangina" name="cp" value=3>
+                        <label for="nangina">Non-anginal</label>
+                        <input type="radio" id="asym" name="cp" value=4>
+                        <label for="asym">Asympyomatic</label>
+                    </p>
+                </div>
+                <div class="input-info">
+                    <label for="rbp" class="ques">Resting Blood Pressure (in mm Hg)</label>
+                    <p><input type="number" name="rbp" required></input></p>
+                </div>
+                <div class="input-info">
+                    <label for="chol" class="ques">Cholestrol (in mg/dl)</label>
+                    <p><input type="number" name="chol" required></input></p>
+                </div>
+                <div class="input-info">
+                    <label for="fbs" class="ques">Fasting Blood Sugar (>120 mg/dl)</label>
+                    <p> <input type="radio" id="yes" name="fbs" value=1>
+                        <label for="yes">True</label>
+                        <input type="radio" id="no" name="fbs" value=0>
+                        <label for="no">False</label>
+                    </p>
+                </div>
+                <div class="input-info" style="margin-bottom: 30px;">
+                    <label for="fbs" class="ques">Resting Electrocardiographic results</label><br>
+                    <p> <input type="radio" id="nor" name="restecg" value=0>
+                        <label for="nor">Normal</label><br>
+                        <input type="radio" id="sttab" name="restecg" value=1>
+                        <label for="sttab"> having ST-T wave abnormality (T wave inversions and/or ST elevation or
+                            depression of >
+                            0.05 mV)</label><br>
+                        <input type="radio" id="lvh" name="restecg" value=2>
+                        <label for="lvh">showing probable or definite left ventricular hypertrophy by Estes'
+                            criteria</label>
+                    </p>
+                </div>
+                <div class="input-info" style="margin-top: 30px;">
+                    <label for="mhr" class="ques">Maximum Heart Rate</label><br>
+                    <p> <input type="number" name="mhr" required></p>
+                </div>
+                <div class="input-info">
+                    <label for="exang" class="ques">Exercise Induced Angina</label>
+                    <p> <input type="radio" id="yes" name="exng" value=1>
+                        <label for="yes">Yes</label>
+                        <input type="radio" id="no" name="exng" value=0>
+                        <label for="no">No</label>
+                    </p>
+                </div>
+                <div class="input-info">
+                    <label for="oldpeek" class="ques">Oldpeek (ST depression induced by exercise relative to rest)</label>
+                    <p><input type="number" name="oldpeek" required step="0.01"></input></p>
+                </div>
+                <div class="input-info">
+                    <label for="dslp" class="ques">Slope (ST segment shift relative to exercise-induced increments in
+                        heart rate)</label>
+                    <p> <input type="radio" id="dslp" name="slp" value=2>
+                        <label for="dslp">Downsloping</label>
+                        <input type="radio" id="flat" name="slp" value=1>
+                        <label for="flat">Flat</label>
+                        <input type="radio" id="uslp" name="" value=0>
+                        <label for="uslp">Upsloping</label>
+                    </p>
+                </div>
+                <div class="input-info">
+                    <label for="caa" class="ques">Number of major vessels</label><br>
+                    <p><input type="rad" name="caa" min="0" max="4"></input></p>
+                </div>
+                <div class="input-info">
+                    <label for="rev" class="ques">Thallium Stress Test Result</label>
+                    <p> <input type="radio" id="rev" name="thall" value=2>
+                        <label for="rev">Reversible Deflect</label>
+                        <input type="radio" id="fix" name="thall" value=1>
+                        <label for="fix">Fixed Deflect</label>
+                        <input type="radio" id="norm" name="thall" value=3>
+                        <label for="norm">Normal</label>
+                        <input type="radio" id="zer" name="thall" value=0>
+                        <label for="zer">0</label>
+                    </p>
+                </div>
+                <div class="inner">
+                    <input type="submit" value="Predict">
+                </div>
+            </div>
+            <div class="input-info">
+                <h3><br>{{prediction_text}}</h3>
+            </div>
+    </div>
+    </form>
+    </div>
+</body>
+
+</html>
